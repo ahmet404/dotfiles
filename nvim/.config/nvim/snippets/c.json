@@ -1,0 +1,41 @@
+{
+  "Starter Template": {
+    "prefix": ",",
+    "body": [
+      "#include <stdio.h>",
+      "#include <stdlib.h>",
+      "",
+      "int main(int argc, char *argv[])",
+      "{$0",
+      "",
+      "\treturn EXIT_SUCCESS;",
+      "}"
+    ],
+    "description": "Standard starter template for a tiny C program"
+  },
+  "Preprocessor Starter Template": {
+    "prefix": "#,",
+    "body": [
+      "// #define NDEBUG // disables assert()",
+      "#include <assert.h>",
+      "#include <errno.h>",
+      "#include <stdbool.h>",
+      "#include <stddef.h>",
+      "#include <stdint.h>",
+      "#include <stdio.h>",
+      "#include <stdlib.h>"
+    ],
+    "description": "Preprocessor starter template for a C project"
+  },
+  "main() template": {
+    "prefix": "main",
+    "body": [
+      "int main(int argc, char *argv[])",
+      "{$0",
+      "",
+      "\treturn EXIT_SUCCESS;",
+      "}"
+    ],
+    "description": "Standard main() snippet"
+  }
+}

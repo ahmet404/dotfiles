@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+BRIGHTNESS_STEPS=5
+notification_timeout=1000
+
+function get_brightness {
+  brightnessctl i | grep -oP '\(\K[^%\)]+'
+}
+
+function get_icon {
+    brightness=$(get_brightness)
+    if [ "$brightness" -gt 0 ] && [ "$brightness" -le 15 ]; then
+        brightness_icon=brightness-1
+    elif [ "$brightness" -gt 15 ] && [ "$brightness" -le 30 ]; then
+        brightness_icon=brightness-2
+    elif [ "$brightness" -gt 30 ] && [ "$brightness" -le 45 ]; then
+        brightness_icon=brightness-3
+    elif [ "$brightness" -gt 45 ] && [ "$brightness" -le 60 ]; then
+        brightness_icon=brightness-4
+    elif [ "$brightness" -gt 60 ] && [ "$brightness" -le 75 ]; then
+        brightness_icon=brightness-5
+    elif [ "$brightness" -gt 75 ] && [ "$brightness" -le 90 ]; then
+        brightness_icon=brightness-6
+    else
+        brightness_icon=brightness-7
+    fi
+}
+
+
+function send_notification {
+    brightness=$(get_brightness)
+    get_icon
+    dunstify -t $notification_timeout "Notification" "Brightness: $brightness%" -i $brightness_icon -r 5555 -u normal -h int:value:$(($brightness))
+}
+
+case $1 in
+  up)
+    # increase the backlight by 5%
+    brightnessctl set "${BRIGHTNESS_STEPS:-5}%+" -q
+    send_notification
+    ;;
+  down)
+    # decrease the backlight by 5%
+    brightnessctl set "${BRIGHTNESS_STEPS:-5}%-" -q
+    send_notification
+    ;;
+esac

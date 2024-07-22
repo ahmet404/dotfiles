@@ -1,0 +1,2 @@
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/tester/.Xauthority" RUN+="/usr/bin/su tester -c '/home/tester/.local/bin/battery-charging discharging'"
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/tester/.Xauthority" RUN+="/usr/bin/su tester -c '/home/tester/.local/bin/battery-charging charging'"

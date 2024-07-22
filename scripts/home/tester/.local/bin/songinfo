@@ -1,0 +1,8 @@
+#!/bin/bash
+musicPath=$(echo "/home/$USER/Music/$(mpc --port=6605 current -f %file%)")
+ffmpeg -i "$musicPath" "/tmp/mpd_album.png" -y &>/dev/null
+# convert /tmp/mpd_album.png \( +clone -alpha extract -draw 'fill black polygon 0,0 0,320 320,0 fill white circle 320,320 320,0' \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite /tmp/mpd_album.png &>/dev/null
+artist=$(mpc --port=6605 -f %artist% current)
+title=$(mpc --port=6605 -f %title% current)
+album=$(mpc --port=6605 -f %album% current)
+notify-send -r 5550 -i /tmp/mpd_album.png " Playing Now..." "Artist: $artist\nTitle: $title\nAlbum: $album"

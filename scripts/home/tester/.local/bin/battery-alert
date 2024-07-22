@@ -1,0 +1,11 @@
+#!/bin/bash
+BATTERY_STATUS=$(cat /sys/class/power_supply/BAT1/status)
+BATTERY_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+
+if [ "$BATTERY_STATUS" == "Discharging" ] && [ "$BATTERY_CAPACITY" -eq 30 ]; then
+    notify-send -r 9991 -u critical -i battery-30 "Low Battery" "$BATTERY_CAPACITY% of battery remaining."
+fi
+
+if [ "$BATTERY_STATUS" == "Discharging" ] && [ "$BATTERY_CAPACITY" -le 15 ]; then
+    notify-send -t 15000 -r 9991 -u critical -i battery-alert "Battery Critical" "$BATTERY_CAPACITY% of battery remaining. \nThe computer will shutdown soon."
+fi

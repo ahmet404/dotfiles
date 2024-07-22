@@ -1,0 +1,51 @@
+!! fonts
+URxvt.font                  : xft:Iosevka Nerd Font:size=11:style=Regular
+URxvt.boldFont              : xft:Iosevka Nerd Font:size=11:style=Medium
+URxvt.italicFont            : xft:Iosevka Nerd Font:size=11:style=Italic
+URxvt.boldItalicFont        : xft:Iosevka Nerd Font:size=11:style=Medium Italic
+URxvt.letterSpace           : 0
+URxvt.lineSpace             : 0
+URxvt.allow_bold            : true
+
+!! main
+URxvt.depth                 : 32
+URxvt.refreshRate           : 0
+URxvt.scrollBar             : false
+URxvt.iso14755              : false
+URxvt.iso14755_52           : false
+URxvt.saveLines             : 500
+
+!! color
+URxvt.foreground            : #ebdbb2
+URxvt.highlightColor        : #d79921
+URxvt.highlightTextColor    : #3c3836
+URxvt.background            : [100]#282828
+URxvt.borderColor           : [100]#282828
+
+!! cursor
+URxvt.cursorColor           : #ebdbb2
+URxvt.cursorBlink           : true
+URxvt.cursorUnderline       : false
+
+!! url
+URxvt.matcher.button        : 1
+URxvt.underlineURLs         : true
+URxvt.urlButton             : 1
+URxvt.url-select.launcher   : /usr/bin/xdg-open
+URxvt.url-select.underline  : true
+
+!! perl extensions
+URxvt.perl-ext-common       : eval,matcher,selection,selection-to-clipboard,keyboard-select,resize-font
+
+!! copy and paste
+URxvt.keysym.Control-C      : eval:selection_to_clipboard
+URxvt.keysym.Control-V      : eval:paste_clipboard
+URxvt.keysym.Control-Y      : eval:paste_primary
+
+!! keyboard-select
+URxvt.keysym.Control-Shift-Escape: keyboard-select:activate
+URxvt.keysym.Meta-s:               keyboard-select:search
+URxvt.keyboard-select.clipboard:   true
+
+!! resize-font
+URxvt.resize-font.step:            1

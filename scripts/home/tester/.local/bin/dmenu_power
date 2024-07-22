@@ -1,0 +1,33 @@
+#!/bin/bash
+# Author: Achmad Fauzi
+
+cmd="rofi -dmenu -i -p System"
+# Options
+shutdown=" Shutdown"
+reboot=" Reboot"
+lock=" Lock"
+suspend=" Suspend"
+logout=" Logout"
+
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+chosen="$(echo -e "$options" | $cmd)"
+case $chosen in
+    $shutdown)
+			systemctl poweroff
+			;;
+    $reboot)
+			systemctl reboot
+			;;
+    $lock)
+			betterlockscreen -l dimblur
+        		;;
+    $suspend)
+			mpc -q pause
+			amixer set Master mute
+			betterlockscreen -l dimblur
+			systemctl suspend
+			;;
+    $logout)
+				i3-msg exit
+				;;
+esac

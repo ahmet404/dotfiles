@@ -1,0 +1,60 @@
+#!/bin/bash
+
+volume_step=5
+max_volume=100
+notification_timeout=1000
+
+get_volume() {
+    pactl get-sink-volume @DEFAULT_SINK@ | cut -d/ -f2 | tr -d ' %' | head -n1
+}
+is_muted() {
+    pactl get-sink-mute @DEFAULT_SINK@ | grep -Po '(?<=Mute: )(yes|no)'
+}
+
+get_icon() {
+    volume=$(get_volume)
+    mute=$(is_muted)
+    if [ "$mute" == "yes" ]; then
+        volume_icon=volume-mute
+        msg="Muted"
+    elif [ "$volume" -eq 0 ]; then 
+        volume_icon=volume-off
+        msg="Notification"
+    elif [ "$volume" -gt 0 ] && [ "$volume" -le 30 ]; then 
+        volume_icon=volume-low
+        msg="Notification"
+    elif [ "$volume" -gt 30 ] && [ "$volume" -le 60 ]; then
+        volume_icon=volume-medium
+        msg="Notification"
+    else
+        volume_icon=volume-high
+        msg="Notification"
+    fi
+}
+
+send_notification() {
+    volume=$(get_volume)
+    get_icon
+    dunstify -t $notification_timeout $msg "Volume: $volume%" -i $volume_icon -r 5555 -u normal -h int:value:$(($volume))
+}
+
+case $1 in
+    up)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        volume=$(get_volume)
+        if [ $(( "$volume" + "$volume_step" )) -gt $max_volume ]; then
+            pactl set-sink-volume @DEFAULT_SINK@ $max_volume%
+        else
+            pactl set-sink-volume @DEFAULT_SINK@ +$volume_step%
+        fi
+        send_notification
+        ;;
+    down)
+        pactl set-sink-volume @DEFAULT_SINK@ -$volume_step%
+        send_notification
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        send_notification
+        ;;
+esac
