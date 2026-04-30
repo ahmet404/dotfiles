@@ -1,0 +1,12 @@
+#!/bin/bash
+
+pidof dunst && killall dunst
+
+dunst &
+
+notify-send -u low -i bell Low "urgency low"
+notify-send -u normal -i bell-badge Normal "urgency normal"
+notify-send -u critical -i alert Critical "urgency critical"
+notify-send "Low Battery" "20% of battery remaining." -u critical -i battery-alert -r 9991
+notify-send "Charging" "50% of battery charged." -u normal -i battery-charging -r 9992
+notify-send "Battery Charged" "Battery is fully charged." -u low -i battery -r 9993

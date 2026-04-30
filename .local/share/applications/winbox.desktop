@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Winbox Mikrotik
+Comment=Wifi Manager Settings
+Icon=/home/badcoder/.local/share/assets/img/winbox.png
+Terminal=false
+Exec=WinBox
+Categories=ConsoleOnly;System;FileTools;FileManager
+MimeType=inode/directory;

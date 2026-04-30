@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=exodia
+Description=default plymouth theme for exodia
+Comment=Created By Mahmoud Mohamed (00xWolf)
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/exodia
+ScriptFile=/usr/share/plymouth/themes/exodia/exodia.script

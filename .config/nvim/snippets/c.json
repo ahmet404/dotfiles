@@ -1,0 +1,39 @@
+{
+  "Starter Template": {
+    "prefix": "$",
+    "body": [
+      "#include <stdio.h>",
+      "#include <stdlib.h>",
+      "",
+      "int main() {",
+      "\t$0",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "Standard starter template for a tiny C program"
+  },
+  "Preprocessor Starter Template": {
+    "prefix": "#,",
+    "body": [
+      "// #define NDEBUG // disables assert()",
+      "#include <assert.h>",
+      "#include <errno.h>",
+      "#include <stdbool.h>",
+      "#include <stddef.h>",
+      "#include <stdint.h>",
+      "#include <stdio.h>",
+      "#include <stdlib.h>"
+    ],
+    "description": "Preprocessor starter template for a C project"
+  },
+  "main() template": {
+    "prefix": "ma",
+    "body": ["int main() {", "\t$0", "\treturn 0;", "}"],
+    "description": "Standard main() snippet"
+  },
+  "Incude completion": {
+    "prefix": "inc",
+    "body": ["#include <$0>"],
+    "description": "Snippet for include c & cpp"
+  }
+}

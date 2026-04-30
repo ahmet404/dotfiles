@@ -1,0 +1,5 @@
+#!/bin/bash
+
+KEY_GIT="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"
+echo "$KEY_GIT" | xsel -i -b
+echo "Teks telah disalin ke clipboard!"

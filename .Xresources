@@ -1,0 +1,3 @@
+#include "/home/badcoder/.Xresources.d/font"
+#include "/home/badcoder/.Xresources.d/color/gruvbox-dark"
+#include "/home/badcoder/.Xresources.d/urxvt"

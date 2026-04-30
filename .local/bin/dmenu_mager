@@ -1,0 +1,48 @@
+#!/bin/bash
+# File              : dmenu_mager
+# License           : MIT License
+# Author            : M. Nabil Adani <nblid48@gmail.com>
+# Date              : Jumat, 15/05/2020 13:12 WIB
+# Last Modified Date: Minggu, 11/10/2020 12:44 WIB
+# Last Modified By  : M. Nabil Adani <nblid48@gmail.com>
+
+DMENU="rofi -dmenu -i -p Mager"
+# OPTIONS = [[label, command]]
+OPTIONS='''
+[
+  [ "aria2",                  "dmenu_aria2" ],
+  [ "droidcam audio only",    "droidcam-cli -a 192.168.43.1 4747 &" ],
+  [ "droidcam video & audio", "droidcam-cli -a -v 192.168.43.1 4747 &" ],
+  [ "droidcam video only",    "droidcam-cli 192.168.43.1 4747 &" ],
+  [ "play video0",            "mpv --no-audio --window-scale=0.5 av://v4l2:/dev/video0 --vf=hflip --profile=low-latency --untimed" ],
+  [ "play video1",            "mpv --no-audio --window-scale=0.5 av://v4l2:/dev/video1 --vf=hflip --profile=low-latency --untimed" ],
+  [ "kill",                   "dmenu_kill" ],
+  [ "kill droidcam",          "pkill droidcam-cli" ],
+  [ "monitor",                "dmenu_monitor" ],
+  [ "mpdmenu",                "dmenu_mpdmenu" ],
+  [ "mpv",                    "dmenu_mpv" ],
+  [ "power",                  "dmenu_power" ],
+  [ "record",                 "dmenu_record" ],
+  [ "droidapps",              "droidapps" ],
+  [ "screenshot",             "dmenu_screenshot" ],
+  [ "switcher",               "dmenu_switcher" ],
+  [ "systemd",                "dmenu_systemd" ],
+  [ "todo",                   "dmenu_todo" ],
+  [ "translate",              "dmenu_translate -i" ],
+  [ "udiskie",                "dmenu_udiskie -matching regex -dmenu -i -no-custom -multi-select -p FlashDrive" ],
+  [ "wifi",                   "dmenu_wifi" ],
+  [ "window",                 "dmenu_window" ],
+  [ "youtube",                "ytfzf -fDH" ],
+  [ "umount iso",             "dmenu_iso" ],
+  [ "photopea",               "chromium --new-window --app=https://www.photopea.com/" ],
+  [ "trello",                 "chromium --new-window --app=https://trello.com/" ],
+  [ "facebook",               "chromium --new-window --app=https://m.facebook.com/" ],
+  [ "tweetDeck",              "chromium --new-window --app=https://tweetdeck.twitter.com/" ],
+  [ "figma",                  "chromium --new-window --app=https://www.figma.com/files/drafts" ],
+  [ "iptv",                   "dmenu_iptv" ],
+  [ "dns switcher",           "dmenu_dns"]
+]
+'''
+
+label=$(echo $OPTIONS | jq -r "sort | .[][0]" | $DMENU)
+exec $(echo $OPTIONS | jq -r ".[] | select(.[0] == \"$label\") | .[1]")

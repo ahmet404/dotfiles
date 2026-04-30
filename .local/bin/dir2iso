@@ -1,0 +1,25 @@
+#!/bin/bash
+# File              : dir2iso
+# License           : MIT License
+# Author            : M. Nabil Adani <nblid48[at]gmail[dot]com>
+# Date              : Rabu, 30/06/2021 12:01 WIB
+# Last Modified Date: Rabu, 30/06/2021 12:49 WIB
+# Last Modified By  : M. Nabil Adani <nblid48[at]gmail[dot]com>
+
+FILENAME="$1"
+LABEL="$1"
+
+if [ ! $(command -v genisoimage) ]; then
+    echo "command \"genisoimage\" not exists on system"
+    exit
+fi
+
+folder_exist=$(realpath "$FILENAME")
+iso_exist=$(realpath "$FILENAME.iso")
+
+if [ -d "$folder_exist" ] && [ ! -f "$iso_exist" ]; then
+    if ((${#LABEL} > 32)); then
+        LABEL=$(echo $LABEL | cut -c 1-32)
+    fi
+    genisoimage -f -J -joliet-long -r -allow-lowercase -allow-multidot -iso-level 3 -volid "$LABEL" -sysid LINUX -volset-size 1 -volset-seqno 1 -no-cache-inodes -full-iso9660-filenames -o "$FILENAME.iso" "$FILENAME"
+fi

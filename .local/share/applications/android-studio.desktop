@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio
+Comment=IDE for Mobile Developer
+Icon=/home/badcoder/android-studio/bin/studio.svg
+Terminal=false
+Exec=/home/badcoder/android-studio/bin/studio
+Categories=IDE;TextEditor;ConsoleOnly;FileTools;FileManager;
+MimeType=inode/directory;
